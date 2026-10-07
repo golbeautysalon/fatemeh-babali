@@ -7,7 +7,7 @@
 <style>
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:"B Nazanin","BNazanin","Nazanin",Tahoma,Arial,sans-serif}
 body{min-height:100vh;background:radial-gradient(circle at 50% 20%,#7a284a,#3b0d20 58%,#16040b);color:white;display:flex;justify-content:center;align-items:center;overflow-x:hidden}
-.wrap{width:100%;max-width:1150px;text-align:center;padding:10px}h1{font-size:clamp(18px,3vw,28px);margin:0 0 5px}
+.wrap{width:100%;max-width:1150px;text-align:center;padding:10px 10px 76px}h1{font-size:clamp(18px,3vw,28px);margin:0 0 5px}
 .hint{font-size:13px;opacity:.86;margin-bottom:8px}.shell{height:min(78vh,720px);min-height:420px;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 24px 24px #0008)}
 #book{margin:auto}.page{background:#fff;overflow:hidden;box-shadow:inset 0 0 16px #0002}
 .page img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:#fff;pointer-events:none}
@@ -23,7 +23,7 @@ body{min-height:100vh;background:radial-gradient(circle at 50% 20%,#7a284a,#3b0d
 @media(max-width:700px){.shell{height:68vh;min-height:390px}}
 
 .installBtn{display:inline-block;margin:7px auto 7px;border:1px solid #c8a35d;background:#fff;color:#7b1743;border-radius:999px;padding:10px 18px;font:inherit;font-weight:bold;cursor:pointer}
-.navBtns{display:flex;gap:10px;justify-content:center;margin:8px auto 4px}.navBtn{border:1px solid #c8a35d;background:#fff;color:#7b1743;border-radius:999px;padding:8px 22px;font:inherit;font-weight:bold;cursor:pointer}.modal{display:none;position:fixed;inset:0;background:#0009;z-index:9999;align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}.modalCard{width:min(92vw,430px);background:#fff;color:#351524;border-radius:22px;padding:22px;box-shadow:0 20px 60px #0008;text-align:right}.modalCard h2{color:#7b1743;text-align:center;margin:0 0 12px}.modalCard ol{padding-right:24px;line-height:2}.modalCard .close{display:block;width:100%;border:0;background:#7b1743;color:#fff;border-radius:999px;padding:10px;font:inherit;font-weight:bold;cursor:pointer;margin-top:10px}.small{font-size:13px;opacity:.8;text-align:center}@media(max-width:700px){.installBtn,.navBtn{font-size:14px;padding:9px 15px}.wrap{padding:6px}.hint{margin-bottom:4px}}
+.navBtns{position:fixed!important;left:0!important;right:0!important;bottom:0!important;transform:none!important;z-index:2147483000!important;display:flex!important;gap:14px;justify-content:center;align-items:center;margin:0!important;padding:10px 12px calc(10px + env(safe-area-inset-bottom))!important;background:rgba(59,13,32,.96);border-top:1px solid #c8a35d;box-shadow:0 -5px 18px #0007}.navBtn{border:1px solid #c8a35d;background:#fff;color:#7b1743;border-radius:999px;padding:8px 22px;font:inherit;font-weight:bold;cursor:pointer}.modal{display:none;position:fixed;inset:0;background:#0009;z-index:9999;align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}.modalCard{width:min(92vw,430px);background:#fff;color:#351524;border-radius:22px;padding:22px;box-shadow:0 20px 60px #0008;text-align:right}.modalCard h2{color:#7b1743;text-align:center;margin:0 0 12px}.modalCard ol{padding-right:24px;line-height:2}.modalCard .close{display:block;width:100%;border:0;background:#7b1743;color:#fff;border-radius:999px;padding:10px;font:inherit;font-weight:bold;cursor:pointer;margin-top:10px}.small{font-size:13px;opacity:.8;text-align:center}@media(max-width:700px){.installBtn,.navBtn{font-size:14px;padding:9px 15px}.wrap{padding:6px 6px 78px}.hint{margin-bottom:4px}.navBtns{left:0!important;right:0!important;bottom:0!important;width:100%!important;max-width:none!important}}
 </style></head><body><div class="wrap">
 <h1>آلبوم نمونه‌کارهای فاطمه بابالی</h1>
 <button id="installBtn" class="installBtn">📱 نصب آلبوم روی گوشی</button><div class="hint">صفحه را با انگشت یا ماوس از راست به چپ ورق بزنید</div>
@@ -42,8 +42,9 @@ body{min-height:100vh;background:radial-gradient(circle at 50% 20%,#7a284a,#3b0d
 <div id="installModal" class="modal"><div class="modalCard"><h2>نصب آلبوم روی گوشی</h2><div id="installHelp"></div><button id="closeModal" class="close">متوجه شدم</button></div></div>
 <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
 <script>
+let pf=null;
 window.addEventListener("load",()=>{
- const pf=new St.PageFlip(document.getElementById("book"),{
+ pf=new St.PageFlip(document.getElementById("book"),{
  width:450,height:600,size:"stretch",minWidth:280,maxWidth:520,minHeight:380,maxHeight:740,
  maxShadowOpacity:.55,showCover:true,mobileScrollSupport:false,usePortrait:true,flippingTime:900,
  swipeDistance:20,useMouseEvents:true,autoSize:true,drawShadow:true});
@@ -51,8 +52,8 @@ window.addEventListener("load",()=>{
  setTimeout(()=>{pf.turnToPage(document.querySelectorAll(".page").length-1);},120);
 });
 </script><script>
-document.getElementById('nextBtn').addEventListener('click',()=>pf&&pf.flipPrev('top'));
-document.getElementById('prevBtn').addEventListener('click',()=>pf&&pf.flipNext('top'));
+document.getElementById('nextBtn').addEventListener('click',()=>{if(!pf)return;try{pf.flipPrev('top');}catch(e){try{pf.flipPrev();}catch(_){}}});
+document.getElementById('prevBtn').addEventListener('click',()=>{if(!pf)return;try{pf.flipNext('top');}catch(e){try{pf.flipNext();}catch(_){}}});
 let deferredInstall=null;
 const installBtn=document.getElementById('installBtn'), modal=document.getElementById('installModal'), help=document.getElementById('installHelp');
 const isiOS=/iphone|ipad|ipod/i.test(navigator.userAgent);

@@ -1,4 +1,4 @@
-const CACHE="fatemeh-babali-v3-autoupdate";
+const CACHE="fatemeh-babali-v4-fixed-nav";
 const ASSETS=[
 "./","./index.html","./manifest.webmanifest","./icon-192.png","./icon-512.png",
 "./images/gol-cube.gif","./images/gol-logo.png","./images/cover.jpg","./images/page01.jpg",
